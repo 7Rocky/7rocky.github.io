@@ -1490,7 +1490,7 @@
  * FUZZ: %DB
 &lt;/code>&lt;/pre>&lt;/div>
 
-&lt;p>We see that we have a login page:&lt;/p></description></item><item><title>Lazy Ballot</title><link>https://7rocky.github.io/en/ctf/htb-challenges/web/lazy-ballot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/en/ctf/htb-challenges/web/lazy-ballot/</guid><description>&lt;p>We are given a website like this:&lt;/p>
+&lt;p>We see that we have a login page (actually, there is a &amp;ldquo;BACKEND&amp;rdquo; link that points to &lt;code>/login&lt;/code>, so fuzzing is not strictly needed):&lt;/p></description></item><item><title>Lazy Ballot</title><link>https://7rocky.github.io/en/ctf/htb-challenges/web/lazy-ballot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/en/ctf/htb-challenges/web/lazy-ballot/</guid><description>&lt;p>We are given a website like this:&lt;/p>
 &lt;p>&lt;img alt="Lazy Ballot 1" src="https://7rocky.github.io/images/HTB-Challenges/HTB-Web-Lazy-Ballot-1.webp">&lt;/p>
 &lt;p>We are also given the server source code in Node.js.&lt;/p>
 &lt;h2 id="source-code-analysis">Source code analysis&lt;/h2>

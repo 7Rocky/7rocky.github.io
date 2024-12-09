@@ -235,7 +235,57 @@ Captured: 0000110111101011000011001100100110001010100001111011001011001101111000
 :00000001FF
 &lt;/code>&lt;/pre>&lt;/div>
 
-&lt;p>We only know that this is the firmware of an LPC2148 microcontroller that is sending data.&lt;/p></description></item><item><title>Secure Digital</title><link>https://7rocky.github.io/en/ctf/htb-challenges/hardware/secure-digital/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/en/ctf/htb-challenges/hardware/secure-digital/</guid><description>&lt;p>We are told that someone has read the master key of a microSD card, and we are given the signal traces in a &lt;code>trace_captured.sal&lt;/code> file.&lt;/p>
+&lt;p>We only know that this is the firmware of an LPC2148 microcontroller that is sending data.&lt;/p></description></item><item><title>Photon Lockdown</title><link>https://7rocky.github.io/en/ctf/htb-challenges/hardware/photon-lockdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/en/ctf/htb-challenges/hardware/photon-lockdown/</guid><description>&lt;p>We are given a folder called &lt;code>ONT&lt;/code> (which stands for Optical Network Terminal) with three files:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#000!important;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">ls&lt;/span>
+fwu_ver	hw_ver	rootfs
+
+&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">cat&lt;/span> &lt;span class="mtku">fwu_ver&lt;/span>
+3.0.5
+
+&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">cat&lt;/span> &lt;span class="mtku">hw_ver&lt;/span>
+X1
+
+&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">file&lt;/span> &lt;span class="mtku">rootfs&lt;/span>
+rootfs: Squashfs filesystem, little endian, version 4.0, zlib compressed, 10936182 bytes, 910 inodes, blocksize: 131072 bytes, created: Sun Oct 1 07:02:43 2023 
+&lt;/code>&lt;/pre>&lt;/div>
+
+&lt;h2 id="file-system-extraction">File system extraction&lt;/h2>
+&lt;p>We can use &lt;code>unsquashfs&lt;/code> or &lt;code>sasquashfs&lt;/code> to decompress the file system, but &lt;code>7z&lt;/code> works as well:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#000!important;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">7z&lt;/span> x &lt;span class="mtku">rootfs&lt;/span>
+
+7-Zip [64] 17.04 : Copyright (c) 1999-2021 Igor Pavlov : 2017-08-28
+p7zip Version 17.04 (locale=utf8,Utf16=on,HugeFiles=on,64 bits,8 CPUs LE)
+
+Scanning the drive for archives:
+1 file, 10936320 bytes (11 MiB)
+
+Extracting archive: rootfs
+--
+Path = rootfs
+Type = SquashFS
+Physical Size = 10936320
+Headers Size = 18934
+File System = SquashFS 4.0
+Method = ZLIB
+Cluster Size = 131072
+Big-endian = -
+Created = 2023-10-01 08:02:43
+Characteristics = DUPLICATES_REMOVED EXPORTABLE
+Code Page = UTF-8
+
+Everything is Ok
+
+Folders: 44
+Files: 865
+Size: 33832668
+Compressed: 10936320
+
+&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">ls&lt;/span>
+&lt;span class="code-blue">bin&lt;/span> &lt;span class="code-red">config&lt;/span> &lt;span class="code-blue">dev&lt;/span> &lt;span class="code-blue">etc&lt;/span> fwu_ver &lt;span class="code-blue">home&lt;/span> hw_ver &lt;span class="code-blue">image&lt;/span> &lt;span class="code-blue">lib&lt;/span> &lt;span class="code-red">mnt&lt;/span> &lt;span class="code-blue">overlay&lt;/span> &lt;span class="code-blue">proc&lt;/span> rootfs &lt;span class="code-blue">run&lt;/span> &lt;span class="code-cyan">sbin&lt;/span> &lt;span class="code-blue">sys&lt;/span> &lt;span class="code-cyan">tmp&lt;/span> &lt;span class="code-blue">usr&lt;/span> &lt;span class="code-blue">var&lt;/span> 
+&lt;/code>&lt;/pre>&lt;/div>
+
+&lt;h2 id="flag">Flag&lt;/h2>
+&lt;p>At this point, we can use &lt;code>grep&lt;/code> to search for the flag (we know its format is &lt;code>HTB{...}&lt;/code>):&lt;/p></description></item><item><title>Secure Digital</title><link>https://7rocky.github.io/en/ctf/htb-challenges/hardware/secure-digital/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/en/ctf/htb-challenges/hardware/secure-digital/</guid><description>&lt;p>We are told that someone has read the master key of a microSD card, and we are given the signal traces in a &lt;code>trace_captured.sal&lt;/code> file.&lt;/p>
 &lt;h2 id="signal-analysis">Signal analysis&lt;/h2>
 &lt;p>We can use Saleae Logic 2 to analyze the traces, and we have this:&lt;/p>
 &lt;p>&lt;img alt="Secure Digital 1" src="https://7rocky.github.io/images/HTB-Challenges/HTB-Hardware-Secure-Digital-1.webp">&lt;/p>

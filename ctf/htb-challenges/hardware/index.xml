@@ -235,7 +235,57 @@ Captured: 0000110111101011000011001100100110001010100001111011001011001101111000
 :00000001FF
 &lt;/code>&lt;/pre>&lt;/div>
 
-&lt;p>Solo sabemos que este es el &lt;em>firmware&lt;/em> de un microcontrolador LPC2148 que está enviando datos.&lt;/p></description></item><item><title>Secure Digital</title><link>https://7rocky.github.io/ctf/htb-challenges/hardware/secure-digital/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/htb-challenges/hardware/secure-digital/</guid><description>&lt;p>Se nos dice que alguien ha leído la clave maestra de una tarjeta microSD, y se nos dan las trazas de las señales en un archivo &lt;code>trace_captured.sal&lt;/code>.&lt;/p>
+&lt;p>Solo sabemos que este es el &lt;em>firmware&lt;/em> de un microcontrolador LPC2148 que está enviando datos.&lt;/p></description></item><item><title>Photon Lockdown</title><link>https://7rocky.github.io/ctf/htb-challenges/hardware/photon-lockdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/htb-challenges/hardware/photon-lockdown/</guid><description>&lt;p>Se nos proporciona una carpeta llamada &lt;code>ONT&lt;/code> (que significa terminal de red óptica) con tres archivos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#000!important;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">ls&lt;/span>
+fwu_ver	hw_ver	rootfs
+
+&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">cat&lt;/span> &lt;span class="mtku">fwu_ver&lt;/span>
+3.0.5
+
+&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">cat&lt;/span> &lt;span class="mtku">hw_ver&lt;/span>
+X1
+
+&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">file&lt;/span> &lt;span class="mtku">rootfs&lt;/span>
+rootfs: Squashfs filesystem, little endian, version 4.0, zlib compressed, 10936182 bytes, 910 inodes, blocksize: 131072 bytes, created: Sun Oct 1 07:02:43 2023 
+&lt;/code>&lt;/pre>&lt;/div>
+
+&lt;h2 id="extracción-del-sistema-de-archivos">Extracción del sistema de archivos&lt;/h2>
+&lt;p>Podemos usar &lt;code>unsquashfs&lt;/code> o &lt;code>sasquashfs&lt;/code> para descomprimir el sistema de archivos, pero &lt;code>7z&lt;/code> también funciona:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#000!important;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">7z&lt;/span> x &lt;span class="mtku">rootfs&lt;/span>
+
+7-Zip [64] 17.04 : Copyright (c) 1999-2021 Igor Pavlov : 2017-08-28
+p7zip Version 17.04 (locale=utf8,Utf16=on,HugeFiles=on,64 bits,8 CPUs LE)
+
+Scanning the drive for archives:
+1 file, 10936320 bytes (11 MiB)
+
+Extracting archive: rootfs
+--
+Path = rootfs
+Type = SquashFS
+Physical Size = 10936320
+Headers Size = 18934
+File System = SquashFS 4.0
+Method = ZLIB
+Cluster Size = 131072
+Big-endian = -
+Created = 2023-10-01 08:02:43
+Characteristics = DUPLICATES_REMOVED EXPORTABLE
+Code Page = UTF-8
+
+Everything is Ok
+
+Folders: 44
+Files: 865
+Size: 33832668
+Compressed: 10936320
+
+&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">ls&lt;/span>
+&lt;span class="code-blue">bin&lt;/span> &lt;span class="code-red">config&lt;/span> &lt;span class="code-blue">dev&lt;/span> &lt;span class="code-blue">etc&lt;/span> fwu_ver &lt;span class="code-blue">home&lt;/span> hw_ver &lt;span class="code-blue">image&lt;/span> &lt;span class="code-blue">lib&lt;/span> &lt;span class="code-red">mnt&lt;/span> &lt;span class="code-blue">overlay&lt;/span> &lt;span class="code-blue">proc&lt;/span> rootfs &lt;span class="code-blue">run&lt;/span> &lt;span class="code-cyan">sbin&lt;/span> &lt;span class="code-blue">sys&lt;/span> &lt;span class="code-cyan">tmp&lt;/span> &lt;span class="code-blue">usr&lt;/span> &lt;span class="code-blue">var&lt;/span> 
+&lt;/code>&lt;/pre>&lt;/div>
+
+&lt;h2 id="_flag_">&lt;em>Flag&lt;/em>&lt;/h2>
+&lt;p>En este punto, podemos usar &lt;code>grep&lt;/code> para buscar la &lt;em>flag&lt;/em> (sabemos que su formato es &lt;code>HTB{...}&lt;/code>):&lt;/p></description></item><item><title>Secure Digital</title><link>https://7rocky.github.io/ctf/htb-challenges/hardware/secure-digital/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/htb-challenges/hardware/secure-digital/</guid><description>&lt;p>Se nos dice que alguien ha leído la clave maestra de una tarjeta microSD, y se nos dan las trazas de las señales en un archivo &lt;code>trace_captured.sal&lt;/code>.&lt;/p>
 &lt;h2 id="análisis-de-señales">Análisis de señales&lt;/h2>
 &lt;p>Podemos usar la lógica de saleae 2 para analizar los rastros, y tenemos esto:&lt;/p>
 &lt;p>&lt;img alt="Secure Digital 1" src="https://7rocky.github.io/images/HTB-Challenges/HTB-Hardware-Secure-Digital-1.webp">&lt;/p>
