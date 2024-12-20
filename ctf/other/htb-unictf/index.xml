@@ -240,7 +240,69 @@
 &lt;span class="mtk1">})();&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>
 
-&lt;p>Este es un &lt;em>script&lt;/em> normal. Referencia a &lt;code>routes/index.js&lt;/code> y &lt;code>database.js&lt;/code>.&lt;/p></description></item><item><title>Curse Breaker</title><link>https://7rocky.github.io/ctf/other/htb-unictf/curse-breaker/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/other/htb-unictf/curse-breaker/</guid><description>&lt;p>Se nos proporciona un binario llamado &lt;code>breaker&lt;/code>:&lt;/p>
+&lt;p>Este es un &lt;em>script&lt;/em> normal. Referencia a &lt;code>routes/index.js&lt;/code> y &lt;code>database.js&lt;/code>.&lt;/p></description></item><item><title>Clutch</title><link>https://7rocky.github.io/ctf/other/htb-unictf/clutch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/other/htb-unictf/clutch/</guid><description>&lt;p>Se nos proporciona el siguiente código en Python que implementa un algoritmo cuántico de distribución clave:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#fff;background-color:#1d1e19;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">hashlib&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">sha256&lt;/span>
+&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">random&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">uniform&lt;/span>
+&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">json&lt;/span>
+
+&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">Crypto&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8 mtku">Util&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8 mtku">Padding&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">unpad&lt;/span>
+&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">Crypto&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8 mtku">Cipher&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">AES&lt;/span>
+
+&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">secret&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">SECRET_MESSAGE&lt;/span>
+&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">alice&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">Alice&lt;/span>
+&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">bob&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">Bob&lt;/span>
+
+&lt;span class="mtk7 mtki">def&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk9 mtki">message&lt;/span>&lt;span class="mtk1">):&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">print&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk8 mtku">json&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8">dumps&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk9 mtki">message&lt;/span>&lt;span class="mtk1">))&lt;/span>
+
+&lt;span class="mtk3"># Python implementation of the Frame-based QKD pro&lt;/span>&lt;span class="mtk3">tocol described here : &lt;/span>&lt;span class="mtk3 detected-link">https://www.mdpi.com/2073-8994/12/6/1053&lt;/span>
+&lt;span class="mtk7 mtki">class&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">QKD&lt;/span>&lt;span class="mtk1">:&lt;/span>&lt;span class="inline-folded">&lt;/span>
+ &lt;span class="mtk3"># ...&lt;/span>
+
+
+&lt;span class="mtk7 mtki">def&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">main&lt;/span>&lt;span class="mtk1">():&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">({&lt;/span>&lt;span class="mtk4">"info"&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk4">"To all ships of The Frontier Board, use your secr&lt;/span>&lt;span class="mtk4">et key to get the coordinates of The Starry Spurr"&lt;/span>&lt;span class="mtk1">})&lt;/span>
+&lt;span class="mtk1"> &lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">({&lt;/span>&lt;span class="mtk4">"info"&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk4">"Initializing QKD..."&lt;/span>&lt;span class="mtk1">})&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">while&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk6">True&lt;/span>&lt;span class="mtk1">:&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">qkd&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">QKD&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk8 mtku">Alice&lt;/span>&lt;span class="mtk1">, &lt;/span>&lt;span class="mtk8 mtku">Bob&lt;/span>&lt;span class="mtk1">)&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">public&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">qkd&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8">execute&lt;/span>&lt;span class="mtk1">()&lt;/span>
+&lt;span class="mtk1"> &lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk1">public&lt;/span>&lt;span class="mtk1">)&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">if&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk4">"error"&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">not&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">in&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">public&lt;/span>&lt;span class="mtk1">:&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">status&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">qkd&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8">check_status&lt;/span>&lt;span class="mtk1">()&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk1">status&lt;/span>&lt;span class="mtk1">)&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">break&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">({&lt;/span>&lt;span class="mtk4">"info"&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk4">"Initialization completed. Only trusted ships can &lt;/span>&lt;span class="mtk4">send valid commands"&lt;/span>&lt;span class="mtk1">})&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">while&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk6">True&lt;/span>&lt;span class="mtk1">:&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">try&lt;/span>&lt;span class="mtk1">:&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">data&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">json&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8">loads&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk8">input&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk4">"&amp;gt; "&lt;/span>&lt;span class="mtk1">))&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">encrypted_command&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">bytes&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8">fromhex&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk1">data&lt;/span>&lt;span class="mtk1">[&lt;/span>&lt;span class="mtk4">"command"&lt;/span>&lt;span class="mtk1">])&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">assert&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">len&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk1">encrypted_command&lt;/span>&lt;span class="mtk1">) &lt;/span>&lt;span class="mtk5">%&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk6">16&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">==&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk6">0&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">except&lt;/span>&lt;span class="mtk1">:&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">({&lt;/span>&lt;span class="mtk4">"error"&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk4">"Invalid input. Please, try again"&lt;/span>&lt;span class="mtk1">})&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">continue&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">command&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">qkd&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8">decrypt_command&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk1">encrypted_command&lt;/span>&lt;span class="mtk1">)&lt;/span>
+&lt;span class="mtk1"> &lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">if&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">command&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">==&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk4">"OPEN THE GATE"&lt;/span>&lt;span class="mtk1">:&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">FLAG&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">open&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk4">'flag.txt'&lt;/span>&lt;span class="mtk1">).&lt;/span>&lt;span class="mtk8">read&lt;/span>&lt;span class="mtk1">()&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">({&lt;/span>&lt;span class="mtk4">"info"&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk7 mtki">f&lt;/span>&lt;span class="mtk4">" Welcome to The Frontier Board, the coordinates o&lt;/span>&lt;span class="mtk4">f The Starry Spurr are &lt;/span>&lt;span class="mtk6">{&lt;/span>&lt;span class="mtk1">SECRET_MESSAGE&lt;/span>&lt;span class="mtk6">}{&lt;/span>&lt;span class="mtk1">FLAG&lt;/span>&lt;span class="mtk6">}&lt;/span>&lt;span class="mtk4">"&lt;/span>&lt;span class="mtk1">})&lt;/span> 
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">exit&lt;/span>&lt;span class="mtk1">()&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">else&lt;/span>&lt;span class="mtk1">:&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">json_print&lt;/span>&lt;span class="mtk1">({&lt;/span>&lt;span class="mtk4">"error"&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk4">"Unknown command. Please, try again"&lt;/span>&lt;span class="mtk1">})&lt;/span>
+
+
+&lt;span class="mtk5">if&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk1">__name__&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">==&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk4">'__main__'&lt;/span>&lt;span class="mtk1">:&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">main&lt;/span>&lt;span class="mtk1">()&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+
+&lt;p>El proyecto está formado por cuatro archivos:&lt;/p></description></item><item><title>Curse Breaker</title><link>https://7rocky.github.io/ctf/other/htb-unictf/curse-breaker/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/other/htb-unictf/curse-breaker/</guid><description>&lt;p>Se nos proporciona un binario llamado &lt;code>breaker&lt;/code>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#000!important;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">&lt;span class="code-cyan">$&lt;/span> &lt;span class="code-dark-green">file&lt;/span> &lt;span class="mtku">breaker&lt;/span>
 breaker: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=276c71525dd765da538440a4615fa5b717e331ad, for GNU/Linux 3.2.0, not stripped 
 &lt;/code>&lt;/pre>&lt;/div>
