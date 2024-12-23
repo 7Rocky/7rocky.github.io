@@ -366,7 +366,38 @@ index.php style.css
 8.0K	wp-blogs/2022/11/style.css
 &lt;/code>&lt;/pre>&lt;/div>
 
-&lt;p>El archivo &lt;code>wp-blogs/2022/11/index.php&lt;/code> es sospechoso porque es enorme y solo tiene 101 líneas:&lt;/p></description></item><item><title>Great Old Talisman</title><link>https://7rocky.github.io/ctf/other/htb-unictf/great-old-talisman/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/other/htb-unictf/great-old-talisman/</guid><description>&lt;p>Se nos proporciona un binario de 64 bits llamado &lt;code>great_old_talisman&lt;/code>:&lt;/p>
+&lt;p>El archivo &lt;code>wp-blogs/2022/11/index.php&lt;/code> es sospechoso porque es enorme y solo tiene 101 líneas:&lt;/p></description></item><item><title>ForgottenArtifact</title><link>https://7rocky.github.io/ctf/other/htb-unictf/forgottenartifact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/other/htb-unictf/forgottenartifact/</guid><description>&lt;p>Se nos proporciona un Smart Contract llamado &lt;code>ForgottenArtifact.sol&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#fff;background-color:#1d1e19;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">&lt;span class="mtk3">// SPDX-License-Identifier: MIT&lt;/span>
+&lt;span class="mtk5">pragma&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">solidity&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk6">^0.8.18&lt;/span>&lt;span class="mtk1">;&lt;/span>
+
+&lt;span class="mtk7 mtki">contract&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">ForgottenArtifact&lt;/span>&lt;span class="mtk1"> {&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7 mtki">uint256&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7 mtki">public&lt;/span>&lt;span class="mtk1"> lastSighting;&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7 mtki">struct&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8 mtku">Artifact&lt;/span>&lt;span class="mtk1"> {&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7 mtki">uint32&lt;/span>&lt;span class="mtk1"> origin;&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7 mtki">address&lt;/span>&lt;span class="mtk1"> discoverer;&lt;/span>
+&lt;span class="mtk1"> }&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7 mtki">constructor&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk7 mtki">uint32&lt;/span>&lt;span class="mtk1"> _origin, &lt;/span>&lt;span class="mtk7 mtki">address&lt;/span>&lt;span class="mtk1"> _discoverer) {&lt;/span>
+&lt;span class="mtk1"> Artifact &lt;/span>&lt;span class="mtk7 mtki">storage&lt;/span>&lt;span class="mtk1"> starrySpurr;&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7 mtki">bytes32&lt;/span>&lt;span class="mtk1"> seed &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7">keccak256&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk9">abi&lt;/span>&lt;span class="mtk1">.&lt;/span>&lt;span class="mtk8">encodePacked&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk9">block&lt;/span>&lt;span class="mtk1">.number, &lt;/span>&lt;span class="mtk9">block&lt;/span>&lt;span class="mtk1">.timestamp, &lt;/span>&lt;span class="mtk9">msg.sender&lt;/span>&lt;span class="mtk1">));&lt;/span> 
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">assembly&lt;/span>&lt;span class="mtk1"> { starrySpurr.slot &lt;/span>&lt;span class="mtk5">:=&lt;/span>&lt;span class="mtk1"> seed }&lt;/span>
+&lt;span class="mtk1"> starrySpurr.origin &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> _origin;&lt;/span>
+&lt;span class="mtk1"> starrySpurr.discoverer &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> _discoverer;&lt;/span>
+&lt;span class="mtk1"> lastSighting &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> _origin;&lt;/span>
+&lt;span class="mtk1"> }&lt;/span>
+
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk7 mtki">function&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">discover&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk7 mtki">bytes32&lt;/span>&lt;span class="mtk1"> _artifactLocation) &lt;/span>&lt;span class="mtk7 mtki">public&lt;/span>&lt;span class="mtk1"> {&lt;/span>
+&lt;span class="mtk1"> Artifact &lt;/span>&lt;span class="mtk7 mtki">storage&lt;/span>&lt;span class="mtk1"> starrySpurr;&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">assembly&lt;/span>&lt;span class="mtk1"> { starrySpurr.slot &lt;/span>&lt;span class="mtk5">:=&lt;/span>&lt;span class="mtk1"> _artifactLocation }&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">require&lt;/span>&lt;span class="mtk1">(starrySpurr.origin !&lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk6">0&lt;/span>&lt;span class="mtk1">, &lt;/span>&lt;span class="mtk4">"ForgottenArtifact: unknown artifact location."&lt;/span>&lt;span class="mtk1">);&lt;/span>
+&lt;span class="mtk1"> starrySpurr.discoverer &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk9">msg.sender&lt;/span>&lt;span class="mtk1">;&lt;/span>
+&lt;span class="mtk1"> lastSighting &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk9">block&lt;/span>&lt;span class="mtk1">.timestamp;&lt;/span>
+&lt;span class="mtk1"> }&lt;/span>
+&lt;span class="mtk1">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+
+&lt;p>Y otro Smart Contract llamado &lt;code>Setup.sol&lt;/code>:&lt;/p></description></item><item><title>Great Old Talisman</title><link>https://7rocky.github.io/ctf/other/htb-unictf/great-old-talisman/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/ctf/other/htb-unictf/great-old-talisman/</guid><description>&lt;p>Se nos proporciona un binario de 64 bits llamado &lt;code>great_old_talisman&lt;/code>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#000!important;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">Arch: amd64-64-little
 RELRO: &lt;span class="code-dark-yellow">Partial RELRO&lt;/span>
 Stack: &lt;span class="code-dark-green">Canary found&lt;/span>
