@@ -1760,7 +1760,34 @@
 &lt;span class="mtk1">}, &lt;/span>&lt;span class="mtk6">10000&lt;/span>&lt;span class="mtk1">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>
 
-&lt;p>MongoDB is used for user authentication and authorization, using &lt;code>mongoose&lt;/code>. This is the only model we have:&lt;/p></description></item><item><title>PumpkinSpice</title><link>https://7rocky.github.io/en/ctf/htb-challenges/web/pumpkinspice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/en/ctf/htb-challenges/web/pumpkinspice/</guid><description>&lt;p>We are given the following website:&lt;/p>
+&lt;p>MongoDB is used for user authentication and authorization, using &lt;code>mongoose&lt;/code>. This is the only model we have:&lt;/p></description></item><item><title>ProxyAsAService</title><link>https://7rocky.github.io/en/ctf/htb-challenges/web/proxyasaservice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/en/ctf/htb-challenges/web/proxyasaservice/</guid><description>&lt;p>We are given a website that redirects to &lt;code>/r/catvideos&lt;/code>:&lt;/p>
+&lt;p>&lt;img alt="ProxyAsAService 1" src="https://7rocky.github.io/images/HTB-Challenges/HTB-Web-ProxyAsAService-1.webp">&lt;/p>
+&lt;p>We are also given the source code of the web application, which is build with Flask (Python).&lt;/p>
+&lt;h2 id="source-code-analysis">Source code analysis&lt;/h2>
+&lt;p>There are some endpoints for a proxy and debugging options (&lt;code>application/index.py&lt;/code>):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#fff;background-color:#1d1e19;-moz-tab-size:2;-o-tab-size:2;tab-size:2">&lt;code class="no-highlight">&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> flask &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> Flask, jsonify&lt;/span>
+&lt;span class="mtk5">from&lt;/span>&lt;span class="mtk1"> application.blueprints.routes &lt;/span>&lt;span class="mtk5">import&lt;/span>&lt;span class="mtk1"> proxy_api, debug&lt;/span> 
+
+&lt;span class="mtk1">app &lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk1"> Flask(__name__)&lt;/span>
+&lt;span class="mtk1">app.config.from_object(&lt;/span>&lt;span class="mtk4">'application.config.Config'&lt;/span>&lt;span class="mtk1">)&lt;/span>
+
+&lt;span class="mtk1">app.register_blueprint(proxy_api, &lt;/span>&lt;span class="mtk9 mtki">url_prefix&lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk4">'/'&lt;/span>&lt;span class="mtk1">)&lt;/span>
+&lt;span class="mtk1">app.register_blueprint(debug, &lt;/span>&lt;span class="mtk9 mtki">url_prefix&lt;/span>&lt;span class="mtk5">=&lt;/span>&lt;span class="mtk4">'/debug'&lt;/span>&lt;span class="mtk1">)&lt;/span>
+
+&lt;span class="mtk8">@app.errorhandler&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk6">404&lt;/span>&lt;span class="mtk1">)&lt;/span>
+&lt;span class="mtk7 mtki">def&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">not_found&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk9 mtki">error&lt;/span>&lt;span class="mtk1">):&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">return&lt;/span>&lt;span class="mtk1"> jsonify({&lt;/span>&lt;span class="mtk4">'error'&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk4">'Not Found'&lt;/span>&lt;span class="mtk1">}), &lt;/span>&lt;span class="mtk6">404&lt;/span>
+
+&lt;span class="mtk8">@app.errorhandler&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk6">403&lt;/span>&lt;span class="mtk1">)&lt;/span>
+&lt;span class="mtk7 mtki">def&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">forbidden&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk9 mtki">error&lt;/span>&lt;span class="mtk1">):&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">return&lt;/span>&lt;span class="mtk1"> jsonify({&lt;/span>&lt;span class="mtk4">'error'&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk4">'Not Allowed'&lt;/span>&lt;span class="mtk1">}), &lt;/span>&lt;span class="mtk6">403&lt;/span>
+
+&lt;span class="mtk8">@app.errorhandler&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk6">400&lt;/span>&lt;span class="mtk1">)&lt;/span>
+&lt;span class="mtk7 mtki">def&lt;/span>&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk8">bad_request&lt;/span>&lt;span class="mtk1">(&lt;/span>&lt;span class="mtk9 mtki">error&lt;/span>&lt;span class="mtk1">):&lt;/span>
+&lt;span class="mtk1"> &lt;/span>&lt;span class="mtk5">return&lt;/span>&lt;span class="mtk1"> jsonify({&lt;/span>&lt;span class="mtk4">'error'&lt;/span>&lt;span class="mtk1">: &lt;/span>&lt;span class="mtk4">'Bad Request'&lt;/span>&lt;span class="mtk1">}), &lt;/span>&lt;span class="mtk6">400&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+
+&lt;p>These are the routes (&lt;code>application/blueprints/routes.py&lt;/code>):&lt;/p></description></item><item><title>PumpkinSpice</title><link>https://7rocky.github.io/en/ctf/htb-challenges/web/pumpkinspice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://7rocky.github.io/en/ctf/htb-challenges/web/pumpkinspice/</guid><description>&lt;p>We are given the following website:&lt;/p>
 &lt;p>&lt;img alt="PumpkinSpice 1" src="https://7rocky.github.io/images/HTB-Challenges/HTB-Web-PumpkinSpice-1.webp">&lt;/p>
 &lt;p>We also have the Python source code of the server (Flask).&lt;/p>
 &lt;h2 id="source-code-analysis">Source code analysis&lt;/h2>
