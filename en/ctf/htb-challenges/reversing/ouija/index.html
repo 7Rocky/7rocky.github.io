@@ -275,7 +275,7 @@ Okay, let's write down this letter! This is a pretty complex operation, you migh
 
 <span class="mtk1">  </span><span class="mtk5">return</span><span class="mtk1"> </span><span class="mtk6">0</span><span class="mtk1">;</span>
 <span class="mtk1">}</span>
-</code></pre></div><p>So, we see that they distinguish between uppercase letters, lowercase letters and special characters. For letters, they substract <code>key_copy</code> (which is 18). In some cases, they add <code>0x1a</code> before to wrap around. Hence, this is a substitution cipher.</p><h2 id="flag">Flag</h2><p>We can do the same operations in the Python REPL and get the flag:</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000!important;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="no-highlight"><span class="code-cyan">$</span> <span class="code-dark-green">python3</span> -q
+</code></pre></div><p>So, we see that they distinguish between uppercase letters, lowercase letters and special characters. For letters, they subtract <code>key_copy</code> (which is 18). In some cases, they add <code>0x1a</code> before to wrap around. Hence, this is a substitution cipher.</p><h2 id="flag">Flag</h2><p>We can do the same operations in the Python REPL and get the flag:</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000!important;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="no-highlight"><span class="code-cyan">$</span> <span class="code-dark-green">python3</span> -q
 &gt;&gt;&gt; flag = []
 &gt;&gt;&gt; enc_flag = 'ZLT{Kdwhafy_ak_fgl_gtxmkuslagf}'
 &gt;&gt;&gt; for c in enc_flag:

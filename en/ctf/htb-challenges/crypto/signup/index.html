@@ -231,7 +231,7 @@ same_k = (29, 74)
 s_{29} = \left(\mathrm{SHA512}{(m_{29})} + x \cdot r\right) \cdot k^{-1} \mod{q} \\
 s_{74} = \left(\mathrm{SHA512}{(m_{74})} + x \cdot r\right) \cdot k^{-1} \mod{q}
 \end{cases}
-$$</p><p>If we substract both equations, we get</p><p class="scroll">$$
+$$</p><p>If we subtract both equations, we get</p><p class="scroll">$$
 s_{29} - s_{74} = \left(\mathrm{SHA512}{(m_{29})} - \mathrm{SHA512}{(m_{74})}\right) \cdot k^{-1} \mod{q}
 $$</p><p>So we can find $k^{-1}$ as follows</p><p class="scroll">$$
 k^{-1} = (s_{29} - s_{74}) \cdot \left(\mathrm{SHA512}{(m_{29})} - \mathrm{SHA512}{(m_{74})}\right)^{-1} \mod{q}

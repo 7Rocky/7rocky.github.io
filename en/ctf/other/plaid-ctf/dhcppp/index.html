@@ -390,7 +390,7 @@ $$</p><p>Where $r$ and $s$ are secret key values.</p><p>There are some omitted n
 \mathrm{tag} = \left((c_1 r^q + c_2 r^{q - 1} + \dots + c_q r \mod{p}) + s\right) \mod{2^{128}} \\
 \mathrm{tag}' = \left((c'_1 r^q + c'_2 r^{q - 1} + \dots + c'_q r \mod{p}) + s\right) \mod{2^{128}}
 \end{cases}
-$$</p><p>If we substract both expressions, we can get rid of $s$:</p><p class="scroll">$$
+$$</p><p>If we subtract both expressions, we can get rid of $s$:</p><p class="scroll">$$
 \mathrm{tag} - \mathrm{tag}' = \left((c_1 - c'_1) r^q + (c_2 - c'_2) r^{q - 1} + \dots + (c_q - c'_q) r \mod{p}\right) \mod{2^{128}}
 $$</p><p>Further, we can get rid of $\mod{2^{128}}$ by adding $k \cdot 2^{128}$ for $-4 \leqslant k &lt; 4$:</p><p class="scroll">$$
 \mathrm{tag} - \mathrm{tag}' + k \cdot 2^{128} = \left((c_1 - c'_1) r^q + (c_2 - c'_2) r^{q - 1} + \dots + (c_q - c'_q) r \mod{p}\right)
